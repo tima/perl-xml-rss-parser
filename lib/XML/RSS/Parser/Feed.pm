@@ -41,10 +41,10 @@ sub channel    { my @c = $_[0]->query('/channel'); $c[0]; }
 sub image      { $_[0]->query('image'); }
 sub items      { $_[0]->query('item'); }
 sub item_count { my @i = $_[0]->items; scalar @i; }
-sub as_xml { XML::RSS::Parser::Util::as_xml($_[0]->contents->[0],1,$_[1]) }
+sub as_xml { XML::RSS::Parser::Util::as_xml($_[0]->contents->[0], 1, $_[1]) }
 
 ###--- hack to keep Class::XPath happy.
-sub qname            { '' }
+sub qname            {''}
 sub attribute_qnames { }
 
 1;

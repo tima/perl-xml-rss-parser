@@ -10,7 +10,7 @@ use XML::Elemental::Util qw( process_name );
 
 # This has its limitations, but should suffice
 sub as_xml {
-    my($node,$dec,$encoding) = @_;
+    my ($node, $dec, $encoding) = @_;
     $encoding ||= 'utf-8';
     my $xml = $dec ? qq(<?xml version="1.0" encoding="$encoding"?>\n) : '';
     my $dumper;
@@ -21,7 +21,7 @@ sub as_xml {
 
         # it must be an element then.
         my ($name, $ns) = process_name($node->name);
-        my $prefix = $XML::RSS::Parser::xpath_ns{$ns};    # missing namespace???
+        my $prefix = $XML::RSS::Parser::xpath_ns{$ns};  # missing namespace???
         $name = "$prefix:$name" if ($prefix && $prefix ne '#default');
         my $xml      = "<$name";
         my $a        = $node->attributes;
@@ -30,7 +30,7 @@ sub as_xml {
             my ($aname, $ans) = process_name($_);
             if ($ans ne $ns) {
                 my $aprefix =
-                  $XML::RSS::Parser::xpath_ns{$ans};      # missing namespace???
+                  $XML::RSS::Parser::xpath_ns{$ans};    # missing namespace???
                 $aname = "$aprefix:$aname"
                   if ($aprefix && $aprefix ne '#default');
             }
@@ -40,7 +40,8 @@ sub as_xml {
             $xml .= '>';
             map { $xml .= $dumper->($_) } @$children;
             $xml .= "</$name>";
-        } else {
+        }
+        else {
             $xml .= '/>';
         }
         $xml;
@@ -50,30 +51,31 @@ sub as_xml {
 }
 
 my %Map = (
-           '&'  => '&amp;',
-           '"'  => '&quot;',
-           '<'  => '&lt;',
-           '>'  => '&gt;',
-           '\'' => '&#39;'
+    '&'  => '&amp;',
+    '"'  => '&quot;',
+    '<'  => '&lt;',
+    '>'  => '&gt;',
+    '\'' => '&#39;'
 );
 my $RE = join '|', keys %Map;
 
 sub encode_xml {
     my ($str, $nocdata) = @_;
     return unless defined($str);
-    if (
-        !$nocdata
+    if (  !$nocdata
         && $str =~ m/
         <[^>]+>  ## HTML markup
         |        ## or
         &(?:(?!(\#([0-9]+)|\#x([0-9a-fA-F]+))).*?);
                  ## something that looks like an HTML entity.
     /x
-      ) {
+      )
+    {
         ## If ]]> exists in the string, encode the > to &gt;.
         $str =~ s/]]>/]]&gt;/g;
         $str = '<![CDATA[' . $str . ']]>';
-      } else {
+    }
+    else {
         $str =~ s!($RE)!$Map{$1}!g;
     }
     $str;

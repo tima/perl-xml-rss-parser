@@ -51,12 +51,12 @@ my %xpath_prefix = (
 my %xpath_ns = reverse %xpath_prefix;
 
 sub new {
-    my $class = shift;
-    my $self = bless {}, $class;
+    my $class  = shift;
+    my $self   = bless {}, $class;
     my $params = {
-                  Document   => 'XML::RSS::Parser::Feed',
-                  Element    => 'XML::RSS::Parser::Element',
-                  Characters => 'XML::RSS::Parser::Characters'
+        Document   => 'XML::RSS::Parser::Feed',
+        Element    => 'XML::RSS::Parser::Element',
+        Characters => 'XML::RSS::Parser::Characters'
     };
     $self->{__parser} = XML::Elemental->parser($params);
     $self;
@@ -84,7 +84,7 @@ sub _parse {
 
 #--- utils
 
-sub prefix { $xpath_ns{$_[1]} }
+sub prefix    { $xpath_ns{$_[1]} }
 sub namespace { $xpath_prefix{$_[1]} }
 
 sub ns_qualify {
@@ -105,11 +105,13 @@ sub rss_normalize {
     my @new_contents;
     my $channel;
     foreach (@{$root->contents}) {
+
         if ($_->can('name') && ($_->name eq $channel_name)) {
             $_->parent($doc);
             $channel = $_;
             $doc->contents([$_]);
-        } else {
+        }
+        else {
             push(@new_contents, $_);
         }
     }

@@ -6,11 +6,10 @@ use base qw(XML::Elemental::Element);
 use XML::Elemental::Util qw(process_name);
 use XML::RSS::Parser::Util;
 
-use Class::XPath 1.4
-  get_name       => 'qname',
-  get_parent     => 'parent',
-  get_root       => 'root',
-  get_children   => sub { $_[0]->contents ? @{$_[0]->contents} : () },
+use Class::XPath 1.4 get_name => 'qname',
+  get_parent                  => 'parent',
+  get_root                    => 'root',
+  get_children => sub { $_[0]->contents ? @{$_[0]->contents} : () },
   get_attr_names => 'attribute_qnames',
   get_attr_value => 'attribute_by_qname',
   get_content    => 'text_content';
@@ -41,7 +40,7 @@ sub qname {
         my $i = 1;
         while (XML::RSS::Parser->namespace("NS$i")) { $i++ }
         XML::RSS::Parser->register_ns_prefix("NS$i", $ns);
-        $prefix                                 = "NS$i";
+        $prefix = "NS$i";
     }
     "$prefix:$local";
 }
@@ -67,7 +66,8 @@ sub attribute_by_qname {
     if ($name =~ /($NAME):($NAME)/) {
         $name = $2;
         $ns = XML::RSS::Parser->namespace($1) || '#UNKNOWN';
-    } else {
+    }
+    else {
         $ns = XML::RSS::Parser->namespace('#DEFAULT') || '';
     }
     my ($local, $ns_parent) = process_name($self->name);

@@ -11,15 +11,18 @@ use Test::More tests => 1;
 
 use Devel::Leak::Object qw(GLOBAL_bless);
 
-use XML::RAI;
+use XML::RSS::Parser;
 
 SKIP: {
     eval "require Test::Weaken";
     skip "Test::Weaken not installed", 1 if $@;
-    my $file = 'x/example2.xml';
+    my $file = 'x/funky.rss';
     my $rss = do { local( @ARGV, $/ ) = $file ; <> } ;
     my $tester = Test::Weaken::leaks(
-		sub { XML::RAI->parse_string($rss) },
+		sub { 
+			my $p = XML::RSS::Parser->new; 
+			return $p->parse_string($rss); 
+		},
 	);
     ok(!$tester); 
 }

@@ -17,12 +17,13 @@ This module requires these other modules and libraries:
 	Class::XPath
 	Class::ErrorHandler
 	Test::More
+	Test::Weaken
 
 COPYRIGHT AND LICENCE
 
 The software is released under the Artistic License. The terms of 
 the Artistic License are described at 
 http://www.perl.com/language/misc/Artistic.html. Except where 
-otherwise noted, XML::RSS::Parser is Copyright 2003-2005, 
-Timothy Appnel, cpan@timaoutloud.org. All rights reserved.
+otherwise noted, XML::RSS::Parser is Copyright 2003-2009, 
+Timothy Appnel, tima@cpan.org. All rights reserved.
 

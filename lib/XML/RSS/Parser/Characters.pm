@@ -13,10 +13,10 @@ sub new {
     $self;
 }
 
-sub as_xml { encode_xml($_[0]->data) } 
+sub as_xml { encode_xml($_[0]->data) }
 
 ###--- hack to keep Class::XPath happy.
-sub qname            { '' }
+sub qname            {''}
 sub attributes       { {} }
 sub contents         { () }
 sub text_content     { $_[0]->data; }
