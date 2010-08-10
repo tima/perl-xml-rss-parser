@@ -126,7 +126,7 @@ sub rss_normalize {
 
 __END__
 
-=begin
+=pod
 
 =head1 NAME
 
@@ -231,9 +231,7 @@ C<channel> and C<item> tags are siblings.
 
 =back
 
-=head2
-
-Two significant changes were made with the release of
+=head2 Two significant changes were made with the release of
 version 4.0.
 
 =over
@@ -309,14 +307,19 @@ more as needed.
 The following objects and methods are provided in this
 package.
 
+=over
+
 =item XML::RSS::Parser->new
 
 Constructor. Returns a reference to a new XML::RSS::Parser
 object.
 
 =item $parser->parse 
+
 =item $parser->parse_file 
+
 =item $parser->parse_string
+
 =item $parser->parse_uri
 
 These methods are mostly pass-thru to the underlying SAX parser
@@ -363,6 +366,8 @@ C<undef>. Inherited from Class::ErrorHandler.
 Returns the last error message set by C<error>. Inherited
 from Class:ErrorHandler.
 
+=back
+
 =head1 DEPENDENCIES
 
 L<XML::SAX>, L<XML::Elemental>, L<Class::ErrorHandler>,
@@ -374,20 +379,25 @@ For example the Yahoo! feeds.
 
 =head1 SEE ALSO
 
-L<XML::RAI>
+=over
 
-The Feed Validator L<http://www.feedvalidator.org/>
+=item * L<XML::RAI>
 
-What is RSS?
+=item * The Feed Validator
+
+L<http://www.feedvalidator.org/>
+
+=item * What is RSS?
+
 L<http://www.xml.com/pub/a/2002/12/18/dive-into-xml.html>
 
-Raising the Bar on RSS Feed Quality
-L<http://www.oreillynet.com/pub/a/webservices/2002/11/19/
-rssfeedquality.html>
+=item * Raising the Bar on RSS Feed Quality
 
-The myth of RSS compatibility
-L<http://diveintomark.org/archives/2004/02/04/incompatible-
-rss>
+L<http://www.oreillynet.com/pub/a/webservices/2002/11/19/rssfeedquality.html>
+
+=item * The myth of RSS compatibility
+
+L<http://diveintomark.org/archives/2004/02/04/incompatible-rss>
 
 =back
 
@@ -398,5 +408,3 @@ Except where otherwise noted, XML::RSS::Parser is Copyright
 reserved.
 
 =cut
-
-=end
